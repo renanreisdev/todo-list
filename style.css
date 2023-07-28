@@ -1,0 +1,116 @@
+html {
+    font-family: 'Inter', sans-serif;
+    font-size: 62.5%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+
+    background: linear-gradient(89deg, #F1F2B5 0%, #135058 100%);
+}
+
+.modal {
+    display: none;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.edit-todo-container {
+    display: none;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 280px;
+    max-width: 800px;
+    width: 100%;
+    height: 200px;
+    padding: 20px;
+
+    border-radius: 5px;
+    background: #FFF;
+}
+
+.close-button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+
+    border: none;
+    background: transparent;
+    background-image: url('./assets/closeButton.svg');
+    cursor: pointer;
+}
+
+.edit-todo-container h1 {
+    color: #343434;
+    font-size: 2.4rem;
+}
+
+.edit-todo-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 36px;
+}
+
+.edit-todo-input {
+    width: 100%;
+    height: 40px;
+    padding: 0 10px;
+
+    border-radius: 5px;
+    border: 2px solid #135058;
+    background: #FFF;
+    outline: #135058;
+}
+
+.edit-todo-input::placeholder {
+    color: #8E8E8E;
+    font-size: 1.4rem;
+}
+
+.edit-todo-input:focus {
+    border: 2px solid #1b707b;
+}
+
+.save-todo-button {
+    align-self: flex-end;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100px;
+    height: 30px;
+    padding: 0 5px;
+
+    border: none;
+    border-radius: 5px;
+    background-color: #135058;
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.save-todo-button i {
+    width: 24px;
+    height: 24px;
+
+    background-image: url('./assets/editButton.svg');
+    background-position: center;
+}
+
+.save-todo-button:hover {
+    background-color: #1b707b;
+}
