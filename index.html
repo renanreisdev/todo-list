@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do List</title>
+</head>
+<body>
+    <div class="app">
+        <div class="modal">
+            <h1>Editar tarefa</h1>
+            <button class="close-button"></button>
+            <form>
+                <input type="text" class="edit-todo-input" placeholder="Nome da tarefa">
+                <button class="save-todo-button" type="submit"></button>
+            </form>
+        </div>
+
+        <header>
+
+            <form>
+                <input type="text" class="todo-input" placeholder="Nova tarefa">
+                <button class="add-todo-button" type="submit"></button>
+            </form>
+            <ul class="todo-status">
+                <li>Todos</li>
+                <li>Concluídos</li>
+                <li>Pendentes</li>
+            </ul>
+        </header>
+
+        <section class="todo-container">
+            <ul class="todo-list"></ul>
+        </section>
+    </div>
+</body>
+</html>
