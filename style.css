@@ -1,3 +1,11 @@
+:root {
+    --primary-color: #135058;
+    --primary-color-hover: #1b707b;
+    --placeholder-color: #8E8E8E;
+    --text-color: #343434;
+    --background-color: #F4F4F4;
+}
+
 html {
     font-family: 'Inter', sans-serif;
     font-size: 62.5%;
@@ -12,6 +20,7 @@ html {
 body {
     width: 100vw;
     height: 100vh;
+    padding: 20px;
 
     background: linear-gradient(89deg, #F1F2B5 0%, #135058 100%);
 }
@@ -24,10 +33,11 @@ body {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
+/* EDIT TODOS */
+
 .edit-todo-container {
     display: none;
     position: relative;
-    display: flex;
     flex-direction: column;
     min-width: 280px;
     max-width: 800px;
@@ -36,7 +46,7 @@ body {
     padding: 20px;
 
     border-radius: 5px;
-    background: #FFF;
+    background: var(--background-color);
 }
 
 .close-button {
@@ -53,7 +63,7 @@ body {
 }
 
 .edit-todo-container h1 {
-    color: #343434;
+    color: var(--text-color);
     font-size: 2.4rem;
 }
 
@@ -70,18 +80,18 @@ body {
     padding: 0 10px;
 
     border-radius: 5px;
-    border: 2px solid #135058;
+    border: 2px solid var(--primary-color);
     background: #FFF;
-    outline: #135058;
+    outline: var(--primary-color);
 }
 
 .edit-todo-input::placeholder {
-    color: #8E8E8E;
+    color: var(--placeholder-color);
     font-size: 1.4rem;
 }
 
 .edit-todo-input:focus {
-    border: 2px solid #1b707b;
+    border: 2px solid var(--primary-color-hover);
 }
 
 .save-todo-button {
@@ -95,8 +105,8 @@ body {
 
     border: none;
     border-radius: 5px;
-    background-color: #135058;
-    color: #FFF;
+    background-color: var(--primary-color);
+    color: #FFFFFF;
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
@@ -112,5 +122,101 @@ body {
 }
 
 .save-todo-button:hover {
-    background-color: #1b707b;
+    background-color: var(--primary-color-hover);
+}
+
+/* APP */
+.app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 280px;
+    max-width: 800px;
+    width: 100%;
+    height: 90vh;
+    padding: 20px 10px;
+
+    border-radius: 5px;
+    background: var(--background-color);
+}
+
+/* HEADER */
+header {
+    width: 100%;
+}
+
+header > form {
+    position: relative;
+    display: flex;
+}
+
+.todo-input {
+    width: 100%;
+    height: 40px;
+    padding: 0 10px;
+
+    border-radius: 5px;
+    border: 2px solid var(--primary-color);
+    outline: var(--primary-color);
+    transition: 0.3s;
+
+    color: var(--text-color);
+    font-size: 1.4rem;
+}
+
+.todo-input::placeholder {
+    color: var(--placeholder-color);
+}
+
+.todo-input:focus {
+    border: 2px solid var(--primary-color-hover);
+}
+
+.add-todo-button {
+    position: absolute;
+    top: 50%;
+    right: 6px;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+
+    border:none;
+    background: transparent;
+    background-image: url('./assets/addButton.svg');
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.add-todo-button:hover {
+    filter: brightness(1.4);
+}
+
+.todo-status {
+    margin-top: 16px;
+    display: flex;
+    gap: 14px;
+
+    color: var(--text-color);
+    font-size: 1.4rem;
+    font-weight: 600;
+    list-style: none;
+}
+
+.todo-status li {
+    padding: 3px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 2px solid transparent;
+    transition: 0.3s;
+}
+
+.todo-status li.active {
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.todo-status li:hover {
+    color: var(--primary-color);
+    border-radius: 3px;
+    border-bottom: 2px solid var(--primary-color);
 }
