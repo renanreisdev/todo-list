@@ -18,11 +18,22 @@ html {
 }
 
 body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100vw;
     height: 100vh;
     padding: 20px;
 
     background: linear-gradient(89deg, #F1F2B5 0%, #135058 100%);
+}
+
+button {
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
 }
 
 .modal {
@@ -56,10 +67,7 @@ body {
     width: 32px;
     height: 32px;
 
-    border: none;
-    background: transparent;
     background-image: url('./assets/closeButton.svg');
-    cursor: pointer;
 }
 
 .edit-todo-container h1 {
@@ -103,13 +111,11 @@ body {
     height: 30px;
     padding: 0 5px;
 
-    border: none;
     border-radius: 5px;
     background-color: var(--primary-color);
     color: #FFFFFF;
     font-size: 16px;
     font-weight: 700;
-    cursor: pointer;
     transition: 0.3s;
 }
 
@@ -117,7 +123,7 @@ body {
     width: 24px;
     height: 24px;
 
-    background-image: url('./assets/editButton.svg');
+    background-image: url('./assets/editButtonHover.svg');
     background-position: center;
 }
 
@@ -180,10 +186,7 @@ header > form {
     width: 32px;
     height: 32px;
 
-    border:none;
-    background: transparent;
     background-image: url('./assets/addButton.svg');
-    cursor: pointer;
     transition: 0.3s;
 }
 
@@ -219,4 +222,68 @@ header > form {
     color: var(--primary-color);
     border-radius: 3px;
     border-bottom: 2px solid var(--primary-color);
+}
+
+/* TO-DO LIST */
+.todo-container {
+    width: 100%;
+    margin-top: 40px;
+}
+
+.todo-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    color: var(--text-color);
+    font-size: 1.2rem;
+    list-style: none;
+}
+
+.todo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2px;
+    width: 100%;
+    height: 40px;
+    padding: 0 10px;
+
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    border: 2px solid var(--primary-color);
+    cursor: grabbing;
+    transition: 0.3s;
+}
+
+.todo-item:hover {
+    background-color: var(--primary-color);
+    color: #FFFFFF;
+}
+
+.todo-item div {
+    display: flex;
+    gap: 5px;
+}
+
+.edit-todo-button {
+    background-image: url('./assets/editButton.svg');
+    transition: 0.3s;
+}
+
+.edit-todo-button:hover {
+    filter: brightness(0.9);
+}
+
+.todo-item:hover .edit-todo-button {
+    background-image: url('./assets/editButtonHover.svg');
+    transition: 0.3s;
+}
+
+.delete-todo-button {
+    background-image: url('./assets/deleteButton.svg');
+}
+
+.delete-todo-button:hover {
+    filter: brightness(0.9);
 }
