@@ -11,25 +11,26 @@
 </head>
 <body>
     <div class="modal"></div>
-    <div class="app">
-        <div class="edit-todo-container">
-            <h1>Editar tarefa</h1>
-            <button class="close-button"></button>
-            <form>
-                <input type="text" class="edit-todo-input" placeholder="Nome da tarefa">
-                <button class="save-todo-button" type="submit"><i></i>Salvar</button>
-            </form>
-        </div>
 
+    <div class="edit-todo-container">
+        <h1>Editar tarefa</h1>
+        <button class="close-button"></button>
+        <form>
+            <input type="text" class="edit-todo-input" placeholder="Nome da tarefa">
+            <button class="save-todo-button" type="submit"><i></i>Salvar</button>
+        </form>
+    </div>
+
+    <div class="app">
         <header>
             <form>
                 <input type="text" class="todo-input" placeholder="Nova tarefa" autofocus>
                 <button class="add-todo-button" type="submit"></button>
             </form>
             <ul class="todo-status">
-                <li class="active">Todos</li>
-                <li>Concluídos</li>
-                <li>Pendentes</li>
+                <li class="pending active">Pendentes</li>
+                <li class="completed">Concluídos</li>
+                <li class="all">Todos</li>
             </ul>
         </header>
 
