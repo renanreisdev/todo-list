@@ -76,8 +76,8 @@ function deleteTodo(element) {
     element.classList.add('delete');
     element.addEventListener('transitionend', () => {
         element.remove();
-    })
-    saveLocalTodos();
+        saveLocalTodos();
+    });
 }
 
 function editTodo(element) {
