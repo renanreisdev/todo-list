@@ -261,6 +261,12 @@ header > form {
     color: #FFFFFF;
 }
 
+.todo-item p {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
 .todo-item div {
     display: flex;
     gap: 5px;
