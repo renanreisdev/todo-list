@@ -23,6 +23,9 @@ closeEditTodoButton.addEventListener('click', closeEditTodo);
 function addTodo(event) {
     event.preventDefault();
 
+    if (error(todoInput)) return;
+    todoInput.closest('form').classList.remove('error');
+
     createTodo(todoInput.value);
     saveLocalTodos();
 
@@ -102,7 +105,10 @@ function closeEditTodo() {
 
 function saveTodo(event) {
     event.preventDefault();
-    console.log(editTodoSelectedElement);
+
+    if (error(editTodoInput)) return;
+    editTodoInput.closest('form').classList.remove('error');
+
     editTodoSelectedElement.innerText = editTodoInput.value;
     closeEditTodo();
     saveLocalTodos();
@@ -127,7 +133,6 @@ function renderAndFilterTodos(element) {
         todo.style.display = "flex";
         todo.classList.remove('effect');
         todo.classList.remove('effect-reverse');
-        //console.log(todo.classList.contains('completed'))
 
         if (todoStatusActive === 'completed' && !todo.classList.contains('completed'))
             todo.style.display = "none";
@@ -185,8 +190,20 @@ function getTodos() {
 
     todos.forEach(todo => {
         createTodo(todo[0], todo[1]);
-    })
+    });
+}
 
+function error(element) {
+    if (element.value.trim() === '') {
+        element.closest('form').setAttribute('data-error', 'Campo não pode ser vazio.');
+        element.closest('form').classList.add('error');
+        element.value = '';
+        element.focus();
+
+        return true;
+    }
+
+    return false;
 }
 
 handleClickTodoList();
