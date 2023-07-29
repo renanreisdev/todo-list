@@ -5,6 +5,7 @@ const todoButton = document.querySelector('.add-todo-button');
 const todoList = document.querySelector('.todo-list');
 
 //Event Listeners
+todoList.addEventListener('click', completeTodo);
 todoButton.addEventListener('click', addTodo);
 todoStatus.addEventListener('click', filterTodos);
 
@@ -37,4 +38,10 @@ function createTodo(text) {
     divElement.appendChild(deleteButtonElement);
 
     return liElement;
+}
+
+function completeTodo({ target }) {
+    if (target.closest('li')) {
+        target.classList.toggle('complete');
+    }
 }

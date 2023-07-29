@@ -1,6 +1,7 @@
 :root {
     --primary-color: #135058;
     --primary-color-hover: #1b707b;
+    --second-color: #EF3833;
     --placeholder-color: #8E8E8E;
     --text-color: #343434;
     --background-color: #F4F4F4;
@@ -292,4 +293,27 @@ header > form {
 
 .delete-todo-button:hover {
     filter: brightness(0.9);
+}
+
+/* TODO COMPLETE */
+.todo-item.complete {
+    border: 2px solid var(--second-color);
+    opacity: 0.4;
+    text-decoration: line-through;
+    transition: 0.3s;
+}
+
+.todo-item.complete:hover {
+    opacity: 1;
+    background-color: #FFFFFF;
+    color: var(--text-color);
+}
+
+.todo-item.complete:hover .edit-todo-button {
+    background-image: url('./assets/editButton.svg');
+    transition: 0.3s;
+}
+
+.todo-item.complete:hover .edit-todo-button:hover {
+    filter: brightness(1.4);
 }
