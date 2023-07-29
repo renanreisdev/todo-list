@@ -8,13 +8,14 @@ const editTodoInput = document.querySelector('.edit-todo-input');
 const saveTodoButton = document.querySelector('.save-todo-button');
 const closeEditTodoButton = document.querySelector('.close-button');
 const modal = document.querySelector('.modal');
+let todoStatusActive = localStorage.getItem('todoStatusActive') || '';
 let editTodoSelectedElement;
 
 //Event Listeners
 document.addEventListener('keydown', handleEscape);
 todoList.addEventListener('click', handleClickTodoList);
 todoButton.addEventListener('click', addTodo);
-todoStatus.addEventListener('click', filterTodos);
+todoStatus.addEventListener('click', renderAndFilterTodos);
 saveTodoButton.addEventListener('click', saveTodo);
 closeEditTodoButton.addEventListener('click', closeEditTodo);
 
@@ -22,16 +23,17 @@ closeEditTodoButton.addEventListener('click', closeEditTodo);
 function addTodo(event) {
     event.preventDefault();
 
-    const liElement = createTodo(todoInput.value);
+    createTodo(todoInput.value);
+    saveLocalTodos();
 
-    todoList.appendChild(liElement);
     todoInput.value = '';
     todoInput.focus();
 }
 
-function createTodo(text) {
+function createTodo(text, completed) {
     const liElement = document.createElement('li');
     liElement.classList.add('todo-item');
+    if (completed) liElement.classList.add('completed');
 
     const pElement = document.createElement('p');
     pElement.innerHTML = text;
@@ -48,7 +50,7 @@ function createTodo(text) {
     deleteButtonElement.classList.add('delete-todo-button');
     divElement.appendChild(deleteButtonElement);
 
-    return liElement;
+    todoList.appendChild(liElement);
 }
 
 function completedTodo(element) {
@@ -59,18 +61,20 @@ function completedTodo(element) {
             element.classList.add('effect');
 
         element.addEventListener('transitionend', () => {
-            filterTodos({ target: todoStatus.querySelector('.active') });
+            renderAndFilterTodos({ target: todoStatus.querySelector('.active') });
         });
     }
-
     element.classList.toggle('completed');
+    saveLocalTodos();
 }
 
 function deleteTodo(element) {
+
     element.classList.add('delete');
     element.addEventListener('transitionend', () => {
         element.remove();
     })
+    saveLocalTodos();
 }
 
 function editTodo(element) {
@@ -101,39 +105,55 @@ function saveTodo(event) {
     console.log(editTodoSelectedElement);
     editTodoSelectedElement.innerText = editTodoInput.value;
     closeEditTodo();
+    saveLocalTodos();
 }
 
-function filterTodos({ target }) {
-    if (
-            !target.classList.contains('all') &&
-            !target.classList.contains('completed') &&
-            !target.classList.contains('pending')
-        ) return;
+function renderAndFilterTodos(element) {
+    if (element) {
+        if (element.target.classList.contains('all') ||
+            element.target.classList.contains('completed') ||
+            element.target.classList.contains('pending')
+        ) {
+            element.target.closest('ul').querySelector('.active').classList.remove('active');
+            element.target.classList.add('active');
+            todoStatusActive = element.target.classList[0];
+            localStorage.setItem('todoStatusActive', todoStatusActive);
+        }
+    }
 
     const todos = todoList.querySelectorAll('.todo-item');
-
-    target.closest('ul').querySelector('.active').classList.remove('active');
-    target.classList.add('active');
 
     todos.forEach(todo => {
         todo.style.display = "flex";
         todo.classList.remove('effect');
         todo.classList.remove('effect-reverse');
-        if (target.classList.contains('completed') && !todo.classList.contains('completed'))
+        //console.log(todo.classList.contains('completed'))
+
+        if (todoStatusActive === 'completed' && !todo.classList.contains('completed'))
             todo.style.display = "none";
 
-        if (target.classList.contains('pending') && todo.classList.contains('completed'))
+        if (todoStatusActive === 'pending' && todo.classList.contains('completed'))
             todo.style.display = "none";
     });
 }
 
-function handleClickTodoList({ target }) {
-    if (target.classList.contains('delete-todo-button')) {
-        deleteTodo(target.closest('li'));
-    } else if (target.classList.contains('edit-todo-button')) {
-        editTodo(target.closest('li').querySelector('p'));
-    } else if (target.closest('li')) {
-        completedTodo(target.closest('li'));
+function handleClickTodoList(element) {
+    if (element) {
+        const target = element.target;
+        if (target.classList.contains('delete-todo-button')) {
+            deleteTodo(target.closest('li'));
+        } else if (target.classList.contains('edit-todo-button')) {
+            editTodo(target.closest('li').querySelector('p'));
+        } else if (target.closest('li')) {
+            completedTodo(target.closest('li'));
+        }
+    } else {
+        if (todoStatusActive === '') {
+            todoStatus.querySelector('.pending').classList.add('active');
+            todoStatusActive = 'pending'
+        } else {
+            todoStatus.querySelector(`.${todoStatusActive}`).classList.add('active');
+        }
     }
 }
 
@@ -143,6 +163,32 @@ function handleEscape(event) {
     }
 }
 
+function saveLocalTodos() {
+    let todos = [];
 
+    todoList.querySelectorAll('.todo-item').forEach(todo => {
+        todos.push([todo.innerText, todo.classList.contains('completed')]);
+    })
 
-// filterTodos({ target: todoStatus.querySelector('.active') });
+    localStorage.setItem('todos', JSON.stringify(todos));
+}
+
+function getTodos() {
+    let todos;
+    if (localStorage.getItem('todos') === null) {
+        todos = [];
+    } else {
+        todos = JSON.parse(localStorage.getItem('todos'));
+    }
+
+    todoList.innerHTML = '';
+
+    todos.forEach(todo => {
+        createTodo(todo[0], todo[1]);
+    })
+
+}
+
+handleClickTodoList();
+getTodos();
+renderAndFilterTodos();
