@@ -5,7 +5,7 @@ const todoButton = document.querySelector('.add-todo-button');
 const todoList = document.querySelector('.todo-list');
 
 //Event Listeners
-todoList.addEventListener('click', completeTodo);
+todoList.addEventListener('click', handleClickTodoList);
 todoButton.addEventListener('click', addTodo);
 todoStatus.addEventListener('click', filterTodos);
 
@@ -16,6 +16,7 @@ function addTodo(event) {
     const liElement = createTodo(todoInput.value);
 
     todoList.appendChild(liElement);
+    todoInput.value = '';
 }
 
 function createTodo(text) {
@@ -40,8 +41,23 @@ function createTodo(text) {
     return liElement;
 }
 
-function completeTodo({ target }) {
-    if (target.closest('li')) {
-        target.classList.toggle('complete');
+function completeTodo(element) {
+    element.classList.toggle('complete');
+}
+
+function deleteTodo(element) {
+    element.classList.add('delete');
+    element.addEventListener('transitionend', () => {
+        element.remove();
+    })
+}
+
+function handleClickTodoList({ target }) {
+    if (target.classList.contains('delete-todo-button')) {
+        deleteTodo(target.closest('li'));
+    } else if (target.classList.contains('edit-todo-button')) {
+        editTodo(target.closest('li'));
+    } else if (target.closest('li')) {
+        completeTodo(target.closest('li'));
     }
 }

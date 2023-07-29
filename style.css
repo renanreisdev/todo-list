@@ -117,7 +117,7 @@ button {
     color: #FFFFFF;
     font-size: 16px;
     font-weight: 700;
-    transition: 0.3s;
+    transition: 0.5s;
 }
 
 .save-todo-button i {
@@ -165,7 +165,7 @@ header > form {
     border-radius: 5px;
     border: 2px solid var(--primary-color);
     outline: var(--primary-color);
-    transition: 0.3s;
+    transition: 0.5s;
 
     color: var(--text-color);
     font-size: 1.4rem;
@@ -188,7 +188,7 @@ header > form {
     height: 32px;
 
     background-image: url('./assets/addButton.svg');
-    transition: 0.3s;
+    transition: 0.5s;
 }
 
 .add-todo-button:hover {
@@ -211,7 +211,7 @@ header > form {
     cursor: pointer;
     border-radius: 5px;
     border: 2px solid transparent;
-    transition: 0.3s;
+    transition: 0.5s;
 }
 
 .todo-status li.active {
@@ -254,7 +254,7 @@ header > form {
     border-radius: 5px;
     border: 2px solid var(--primary-color);
     cursor: grabbing;
-    transition: 0.3s;
+    transition: 0.5s;
 }
 
 .todo-item:hover {
@@ -275,7 +275,7 @@ header > form {
 
 .edit-todo-button {
     background-image: url('./assets/editButton.svg');
-    transition: 0.3s;
+    transition: 0.5s;
 }
 
 .edit-todo-button:hover {
@@ -284,7 +284,7 @@ header > form {
 
 .todo-item:hover .edit-todo-button {
     background-image: url('./assets/editButtonHover.svg');
-    transition: 0.3s;
+    transition: 0.5s;
 }
 
 .delete-todo-button {
@@ -297,23 +297,32 @@ header > form {
 
 /* TODO COMPLETE */
 .todo-item.complete {
+    background-color: #FFFFFF;
     border: 2px solid var(--second-color);
+    color: var(--text-color);
     opacity: 0.4;
     text-decoration: line-through;
-    transition: 0.3s;
 }
 
-.todo-item.complete:hover {
+/* .todo-item.complete:hover {
     opacity: 1;
     background-color: #FFFFFF;
     color: var(--text-color);
-}
+} */
 
 .todo-item.complete:hover .edit-todo-button {
     background-image: url('./assets/editButton.svg');
-    transition: 0.3s;
+    transition: 0.5s;
 }
 
 .todo-item.complete:hover .edit-todo-button:hover {
     filter: brightness(1.4);
+}
+
+/* TODO DELETE */
+.todo-item.delete {
+    border: 2px solid var(--second-color);
+    opacity: 0;
+
+    transform: translateY(20px) rotateZ(10deg);
 }
